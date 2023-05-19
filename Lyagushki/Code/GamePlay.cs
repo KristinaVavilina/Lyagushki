@@ -1,12 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Lyagushki
 {
@@ -34,13 +28,12 @@ namespace Lyagushki
         public static Texture2D Hunger20 { get; set; }
         public static Texture2D Hunger21 { get; set; }
         public static Texture2D Hunger22 { get; set; }
-
+        public static Texture2D Hunger23 { get; set; }
         public static Texture2D Background { get; set; }
-
-        public static int Width;
-        public static int Height;
-
         public static SpriteBatch spriteBatch { get; set; }
+
+        public static int Width, Height, timeCounter;
+        public static int index = 22;
 
         public static void Init(int Width, int Height, SpriteBatch spriteBatch)
         {
@@ -51,19 +44,41 @@ namespace Lyagushki
 
         public static void Draw()
         {
-            var texturesHunger = new Texture[]
+            var textursHunger = new Texture2D[]
             {
                 Hunger1, Hunger2, Hunger3, Hunger4, Hunger5, Hunger6, Hunger7, Hunger8,
                 Hunger9, Hunger10, Hunger11, Hunger12, Hunger13, Hunger14, Hunger15, Hunger16,
-                Hunger17, Hunger18, Hunger19, Hunger20, Hunger21, Hunger22,
+                Hunger17, Hunger18, Hunger19, Hunger20, Hunger21, Hunger22, Hunger23
             };
 
             spriteBatch.Draw(Background, new Rectangle(0, 0, 1366, 768), Color.White);
-            spriteBatch.Draw(Hunger1, Vector2.Zero, Color.White);
+            spriteBatch.Draw(textursHunger[index], Vector2.Zero, Color.White);
+            TextureHunger();
         }
 
         public static void Update()
         {
+            timeCounter++;
+        }
+
+        public static void TextureHunger()
+        {
+            if (timeCounter % 10 == 0 && index != -1) index--;
+            if (index == -1)
+            {
+                index = 22;
+                MoveFrog.Index = 1;
+            }
+        }
+    }
+
+    public class Timer
+    {
+        public static float Time { get; private set; }
+
+        public static void Update(GameTime gameTime)
+        {
+            Time = (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
     }
 }

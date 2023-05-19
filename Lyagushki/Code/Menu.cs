@@ -40,20 +40,20 @@ namespace Lyagushki
 
         public static int OptionsCounter
         {
-                          get
-                          {
-                              return optionsCounter;
-                          }
+            get
+            {
+                return optionsCounter;
+            }
 
-                          set
-                          {
-                              if (value > 3) optionsCounter = 3;
-                              if (value < 1) optionsCounter = 1;
-                              else optionsCounter = value;
-                              if (optionsCounter == 1) option = MenuOptions.Play;
-                              else if (optionsCounter == 2) option = MenuOptions.Training;
-                              else option = MenuOptions.Exit;
-                          }
+            set
+            {
+                if (value > 3) optionsCounter = 3;
+                if (value < 1) optionsCounter = 1;
+                else optionsCounter = value;
+                if (optionsCounter == 1) option = MenuOptions.Play;
+                else if (optionsCounter == 2) option = MenuOptions.Training;
+                else option = MenuOptions.Exit;
+            }
         }
 
         public static void Draw()

@@ -13,7 +13,6 @@ namespace Lyagushki
 
     public class Game1 : Game
     {
-        //public static GameTime GameTime = new GameTime();
         public static GraphicsDeviceManager graphics;
         public static SpriteBatch spriteBatch;
         Stat Stat = Stat.SplashScreen;
@@ -73,6 +72,7 @@ namespace Lyagushki
             GamePlay.Hunger20 = Content.Load<Texture2D>("Hunger/Hunger20");
             GamePlay.Hunger21 = Content.Load<Texture2D>("Hunger/Hunger21");
             GamePlay.Hunger22 = Content.Load<Texture2D>("Hunger/Hunger22");
+            GamePlay.Hunger23 = Content.Load<Texture2D>("Hunger/Hunger23");
 
             GamePlay.Background = Content.Load<Texture2D>("Swamp");
             GamePlay.Init(graphics.PreferredBackBufferWidth, graphics.PreferredBackBufferHeight, spriteBatch);
@@ -92,7 +92,6 @@ namespace Lyagushki
         protected override void Update(GameTime gameTime)
         {
             KeyboardState keyboardState = Keyboard.GetState();
-
             switch (Stat)
             {
                 case Stat.SplashScreen:
@@ -101,10 +100,16 @@ namespace Lyagushki
                     break;
                 case Stat.Game:
                     WaterLilies.Update();
+                    Frog.Update();
+                    GamePlay.Update();
                     if (keyboardState.IsKeyDown(Keys.Escape)) Stat = Stat.Menu;
-                    if (keyboardState.IsKeyDown(Keys.S)) Frog.MoveFrog.Down();
                     if (keyboardState.IsKeyDown(Keys.Space)) Frog.MoveFrog.Jump();
+                    if (keyboardState.IsKeyDown(Keys.W)) Frog.MoveFrog.Up();
+                    if (keyboardState.IsKeyDown(Keys.A)) Frog.MoveFrog.Left();
+                    if (keyboardState.IsKeyDown(Keys.D)) Frog.MoveFrog.Right();
+                    if (keyboardState.IsKeyDown(Keys.S)) Frog.MoveFrog.Down();
                     if (keyboardState.IsKeyUp(Keys.Space)) MoveFrog.endJump = false;
+
                     break;
                 case Stat.Menu:
                     if (keyboardState.IsKeyDown(Keys.W) && keyboardState2.IsKeyUp(Keys.W)) Menu.OptionsCounter--;
@@ -126,9 +131,9 @@ namespace Lyagushki
                     break;
             }
             keyboardState2 = keyboardState;
+            base.Update(gameTime);
             //if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || keyboardState.IsKeyDown(Keys.Escape))
             //    Exit();
-            base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime)
