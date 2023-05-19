@@ -213,6 +213,7 @@ namespace Lyagushki
     {
         Vector2 position;
         Vector2 direction;
+        public static Vector2 positionFrog;
 
         public static Texture2D TextureFly { get; set; }
 
@@ -227,10 +228,13 @@ namespace Lyagushki
             this.direction = Direction;
         }
 
+        public static Vector2 GetPositionFly() => new Vector2(positionFrog.X, positionFrog.Y);
+
         public void Update()
         {
             position.Y += direction.Y;
             position.X += WaterLilies.GetIntRandomValues((int)direction.X - 5, (int)direction.X + 5);
+            positionFrog = position;
 
             if (position.Y >= WaterLilies.Height)
             {

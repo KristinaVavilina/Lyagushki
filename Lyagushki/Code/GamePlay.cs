@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 
 namespace Lyagushki
@@ -34,12 +35,16 @@ namespace Lyagushki
 
         public static int Width, Height, timeCounter;
         public static int index = 22;
+        public static Vector2 position;
+
+        public static MouseState lastMouseState;
 
         public static void Init(int Width, int Height, SpriteBatch spriteBatch)
         {
             GamePlay.spriteBatch = spriteBatch;
             GamePlay.Width = Width;
             GamePlay.Height = Height;
+            //IsMouseVisible = true;
         }
 
         public static void Draw()
@@ -59,6 +64,13 @@ namespace Lyagushki
         public static void Update()
         {
             timeCounter++;
+
+            //MouseState currentMouseState = Mouse.GetState();
+
+            //if (currentMouseState.X != lastMouseState.X ||
+            //    currentMouseState.Y != lastMouseState.Y)
+            //    position = new Vector2(currentMouseState.X, currentMouseState.Y);
+            //lastMouseState = currentMouseState;
         }
 
         public static void TextureHunger()
@@ -69,6 +81,11 @@ namespace Lyagushki
                 index = 22;
                 MoveFrog.Index = 1;
             }
+        }
+
+        public static void InteractionCursorAndFly()
+        {
+            //if (Mouse.GetState().LeftButton)
         }
     }
 
